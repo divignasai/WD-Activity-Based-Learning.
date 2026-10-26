@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrangeCare | Doctor Appointment</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fff8f2;
+            color: #333333;
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: #f07824;
+            color: white;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        header span {
+            color: #ffe0c2;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #ffe0c2;
+            text-decoration: underline;
+        }
+
+        /* Search Bar */
+        .search {
+            background: white;
+            padding: 15px 7%;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+        }
+
+        .search button {
+            padding: 12px 22px;
+            background: #f07824;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Welcome Banner */
+        .banner {
+            margin: 25px 7%;
+            padding: 45px 30px;
+            background: linear-gradient(120deg, #ffe0c2, #ffffff);
+            border-radius: 12px;
+            border-left: 6px solid #f07824;
+        }
+
+        .banner h2 {
+            font-size: 32px;
+            color: #b94e08;
+            margin-bottom: 12px;
+        }
+
+        .banner p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f07824;
+            color: white;
+            padding: 12px 22px;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #c95d10;
+        }
+
+        /* Main Sections */
+        main {
+            padding: 10px 7% 35px;
+        }
+
+        .section-title {
+            font-size: 25px;
+            margin: 25px 0 20px;
+        }
+
+        /* Specializations */
+        .specialties {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .specialty {
+            background: white;
+            padding: 22px 10px;
+            text-align: center;
+            border: 1px solid #ffdfc5;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .specialty:hover {
+            background: #fff0e3;
+            transform: translateY(-4px);
+        }
+
+        .specialty h3 {
+            color: #c95d10;
+            margin-bottom: 8px;
+        }
+
+        /* Doctor Cards */
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .doctor-card {
+            background: white;
+            border: 1px solid #f1d7c4;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px #00000015;
+        }
+
+        .doctor-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #ffe7d5;
+        }
+
+        .doctor-info {
+            padding: 20px;
+        }
+
+        .doctor-info h3 {
+            color: #b94e08;
+            margin-bottom: 10px;
+        }
+
+        .doctor-info p {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .availability {
+            display: inline-block;
+            margin: 12px 0;
+            padding: 6px 10px;
+            background: #fff0e3;
+            color: #a74708;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .doctor-info .btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Appointment Form */
+        .appointment {
+            background: white;
+            border: 1px solid #f1d7c4;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 35px;
+        }
+
+        .appointment h2 {
+            color: #b94e08;
+            margin-bottom: 10px;
+        }
+
+        .appointment > p {
+            margin-bottom: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .appointment button {
+            margin-top: 20px;
+        }
+
+        /* Consultation Schedule */
+        .schedule {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            margin-top: 20px;
+        }
+
+        .schedule th,
+        .schedule td {
+            border: 1px solid #f1d7c4;
+            padding: 14px;
+            text-align: left;
+        }
+
+        .schedule th {
+            background: #f07824;
+            color: white;
+        }
+
+        .schedule tr:nth-child(even) {
+            background: #fff0e3;
+        }
+
+        /* Visiting Information */
+        .info-box {
+            background: #ffe9d7;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+            line-height: 1.9;
+        }
+
+        /* Footer */
+        footer {
+            background: #b94e08;
+            color: white;
+            text-align: center;
+            padding: 30px 7%;
+            margin-top: 35px;
+        }
+
+        footer p {
+            margin: 10px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 800px) {
+            .doctor-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .specialties {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .banner h2 {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .doctor-grid,
+            .specialties,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 6px;
+            }
+
+            .banner {
+                margin: 20px 4%;
+            }
+
+            main {
+                padding-left: 4%;
+                padding-right: 4%;
+            }
+
+            .search {
+                padding: 12px 4%;
+            }
+
+            .appointment {
+                padding: 18px;
+            }
+
+            .schedule th,
+            .schedule td {
+                padding: 8px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Orange<span>Care.</span></h1>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#specialties">Specialties</a>
+            <a href="#doctors">Doctors</a>
+            <a href="#schedule">Timings</a>
+            <a href="#appointment">Book Appointment</a>
+        </nav>
+    </header>
+
+    <!-- Doctor Search -->
+    <form class="search"
+          onsubmit="event.preventDefault(); searchDoctors();">
+        <input type="search" id="doctorSearch"
+               placeholder="Search doctor or specialization..."
+               aria-label="Search doctors">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Welcome Section -->
+    <section class="banner" id="home">
+        <h2>Your Health, Our Priority.</h2>
+        <p>
+            Welcome to OrangeCare, your trusted healthcare partner.
+            Find experienced doctors, explore medical specialties,
+            and request an appointment with ease.
+        </p>
+        <a href="#appointment" class="btn">Book an Appointment</a>
+    </section>
+
+    <main>
+
+        <!-- Specializations -->
+        <section id="specialties">
+            <h2 class="section-title">Our Specialties</h2>
+
+            <div class="specialties">
+                <article class="specialty">
+                    <h3>Cardiology</h3>
+                    <p>Heart Care</p>
+                </article>
+
+                <article class="specialty">
+                    <h3>Dermatology</h3>
+                    <p>Skin Care</p>
+                </article>
+
+                <article class="specialty">
+                    <h3>Pediatrics</h3>
+                    <p>Child Care</p>
+                </article>
+
+                <article class="specialty">
+                    <h3>Orthopedics</h3>
+                    <p>Bone Care</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Doctor Profiles -->
+        <section id="doctors">
+            <h2 class="section-title">Meet Our Doctors</h2>
+
+            <div class="doctor-grid">
+
+                <article class="doctor-card">
+                    <img
+                    src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500"
+                    alt="Doctor profile">
+
+                    <div class="doctor-info">
+                        <h3>Dr. Rahul Sharma</h3>
+                        <p><strong>Specialty:</strong> Cardiology</p>
+                        <p><strong>Experience:</strong> 12 years</p>
+                        <p><strong>Consultation:</strong> ₹500</p>
+                        <p><strong>Timings:</strong> 9 AM - 1 PM</p>
+
+                        <span class="availability">Available</span>
+
+                        <button class="btn"
+                                onclick="selectDoctor('Dr. Rahul Sharma')">
+                            Book Appointment
+                        </button>
+                    </div>
+                </article>
+
+                <article class="doctor-card">
+                    <img
+                    src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500"
+                    alt="Doctor profile">
+
+                    <div class="doctor-info">
+                        <h3>Dr. Priya Reddy</h3>
+                        <p><strong>Specialty:</strong> Dermatology</p>
+                        <p><strong>Experience:</strong> 8 years</p>
+                        <p><strong>Consultation:</strong> ₹400</p>
+                        <p><strong>Timings:</strong> 10 AM - 2 PM</p>
+
+                        <span class="availability">Available</span>
+
+                        <button class="btn"
+                                onclick="selectDoctor('Dr. Priya Reddy')">
+                            Book Appointment
+                        </button>
+                    </div>
+                </article>
+
+                <article class="doctor-card">
+                    <img
+                    src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=500"
+                    alt="Doctor profile">
+
+                    <div class="doctor-info">
+                        <h3>Dr. Arjun Kumar</h3>
+                        <p><strong>Specialty:</strong> Pediatrics</p>
+                        <p><strong>Experience:</strong> 10 years</p>
+                        <p><strong>Consultation:</strong> ₹350</p>
+                        <p><strong>Timings:</strong> 4 PM - 8 PM</p>
+
+                        <span class="availability">Available</span>
+
+                        <button class="btn"
+                                onclick="selectDoctor('Dr. Arjun Kumar')">
+                            Book Appointment
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+
+            <p id="noResults" hidden>
+                No matching doctors found. Try another search.
+            </p>
+        </section>
+
+        <!-- Consultation Schedule -->
+        <section id="schedule">
+            <h2 class="section-title">Consultation Schedule</h2>
+
+            <table class="schedule">
+                <thead>
+                    <tr>
+                        <th>Doctor</th>
+                        <th>Specialty</th>
+                        <th>Available Days</th>
+                        <th>Timings</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Dr. Rahul Sharma</td>
+                        <td>Cardiology</td>
+                        <td>Mon - Fri</td>
+                        <td>9 AM - 1 PM</td>
+                    </tr>
+
+                    <tr>
+                        <td>Dr. Priya Reddy</td>
+                        <td>Dermatology</td>
+                        <td>Mon - Sat</td>
+                        <td>10 AM - 2 PM</td>
+                    </tr>
+
+                    <tr>
+                        <td>Dr. Arjun Kumar</td>
+                        <td>Pediatrics</td>
+                        <td>Mon - Fri</td>
+                        <td>4 PM - 8 PM</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Appointment Registration -->
+        <section class="appointment" id="appointment">
+            <h2>Book Your Appointment</h2>
+            <p>Fill in your details to submit an appointment request.</p>
+
+            <form onsubmit="submitAppointment(event)">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="patientName">Patient Name</label>
+                        <input type="text" id="patientName"
+                               placeholder="Enter your full name"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email"
+                               placeholder="Enter your email"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone"
+                               placeholder="Enter phone number"
+                               pattern="[0-9]{10}"
+                               title="Enter a 10-digit phone number"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doctor">Select Doctor</label>
+                        <select id="doctor" required>
+                            <option value="">Choose a doctor</option>
+                            <option>Dr. Rahul Sharma</option>
+                            <option>Dr. Priya Reddy</option>
+                            <option>Dr. Arjun Kumar</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Appointment Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">Available Slot</label>
+                        <select id="time" required>
+                            <option value="">Select a time</option>
+                            <option>9:00 AM</option>
+                            <option>10:00 AM</option>
+                            <option>11:00 AM</option>
+                            <option>12:00 PM</option>
+                            <option>4:00 PM</option>
+                            <option>5:00 PM</option>
+                            <option>6:00 PM</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="reason">Reason for Visit</label>
+                        <textarea id="reason"
+                                  placeholder="Briefly describe your reason for visiting"></textarea>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn">
+                    Submit Appointment Request
+                </button>
+
+            </form>
+        </section>
+
+        <!-- Hospital Information -->
+        <section class="info-box">
+            <h2>Hospital Information</h2>
+            <p><strong>Visiting Hours:</strong> Monday - Saturday, 9 AM - 8 PM</p>
+            <p><strong>Emergency Contact:</strong> 108 (India ambulance emergency number)</p>
+            <p><strong>Facilities:</strong> Pharmacy, Laboratory, Diagnostic Services</p>
+            <p><strong>Address:</strong> OrangeCare Hospital, Main Road, Vijayawada</p>
+            <p><em>Note: Doctor details and timings shown here are sample project data.</em></p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <h2>OrangeCare.</h2>
+        <p>Your Health, Our Priority.</p>
+
+        <p>
+            <a href="#home">Home</a>
+            <a href="#doctors">Doctors</a>
+            <a href="#appointment">Appointments</a>
+        </p>
+
+        <p>&copy; 2026 OrangeCare. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Select a doctor from the profile card
+        function selectDoctor(name) {
+            document.getElementById("doctor").value = name;
+            document.getElementById("appointment").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+        // Search doctors by name or specialty
+        function searchDoctors() {
+            let query = document.getElementById("doctorSearch")
+                .value.toLowerCase().trim();
+
+            let cards = document.querySelectorAll(".doctor-card");
+            let count = 0;
+
+            cards.forEach(function(card) {
+                let matches = card.textContent
+                    .toLowerCase().includes(query);
+
+                card.style.display = matches ? "" : "none";
+
+                if (matches) {
+                    count++;
+                }
+            });
+
+            document.getElementById("noResults").hidden = count > 0;
+        }
+
+        // Demonstration appointment request
+        function submitAppointment(event) {
+            event.preventDefault();
+
+            let name = document.getElementById("patientName").value;
+            let doctor = document.getElementById("doctor").value;
+            let date = document.getElementById("date").value;
+
+            alert(
+                "Appointment request submitted!\n" +
+                "Patient: " + name + "\n" +
+                "Doctor: " + doctor + "\n" +
+                "Date: " + date +
+                "\n\nThis is a demo. No real booking was made."
+            );
+        }
+
+        // Prevent selecting a past appointment date
+        document.getElementById("date").min =
+            new Date().toLocaleDateString("en-CA");
+    </script>
+
+</body>
+</html>
