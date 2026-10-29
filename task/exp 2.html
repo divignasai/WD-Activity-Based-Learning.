@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PinkCart - Online Shopping</title>
+
+    <style>
+        /* Basic CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #444;
+        }
+
+        /* Header */
+        header {
+            background-color: #d94f83;
+            color: white;
+            text-align: center;
+            padding: 22px;
+        }
+
+        header p {
+            margin-top: 8px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        nav a {
+            color: #d94f83;
+            text-decoration: none;
+            margin: 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #666;
+            text-decoration: underline;
+        }
+
+        /* Welcome section */
+        .hero {
+            background-color: #f8dce7;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero h2 {
+            color: #bd356b;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #d94f83;
+            color: white;
+            border: none;
+            padding: 11px 22px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #a92e60;
+        }
+
+        /* Product section */
+        .products {
+            padding: 30px 15px;
+            text-align: center;
+        }
+
+        .products h2 {
+            color: #bd356b;
+            margin-bottom: 25px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        /* Product boxes */
+        .box {
+            background-color: white;
+            width: 250px;
+            padding: 22px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 3px 9px #ccc;
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 7px 16px #bbb;
+            border-color: #d94f83;
+        }
+
+        .product-icon {
+            background-color: #f8dce7;
+            font-size: 48px;
+            padding: 18px;
+            border-radius: 8px;
+        }
+
+        .box h3 {
+            color: #bd356b;
+            margin: 15px 0 10px;
+        }
+
+        .box p {
+            margin: 8px 0;
+        }
+
+        .price {
+            color: #d94f83;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Shopping information table */
+        .information {
+            background-color: white;
+            width: 90%;
+            max-width: 850px;
+            margin: 25px auto;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .information h2 {
+            text-align: center;
+            color: #bd356b;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #d94f83;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f5e9ee;
+        }
+
+        /* Order form */
+        .order {
+            background-color: white;
+            width: 90%;
+            max-width: 600px;
+            margin: 25px auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 9px #ccc;
+        }
+
+        .order h2 {
+            color: #bd356b;
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 7px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: 2px solid #e99bb9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #555;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 7px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            nav a {
+                display: inline-block;
+                margin: 7px;
+            }
+
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .box {
+                width: 90%;
+                max-width: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="home">
+        <h1>PinkCart</h1>
+        <p>Your Style, Your Choice!</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#offers">Offers</a>
+        <a href="#order">Order Now</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Welcome section -->
+    <section class="hero">
+        <h2>Welcome to PinkCart!</h2>
+        <p>Discover amazing products at affordable prices.</p>
+        <a href="#products">
+            <button type="button">Shop Now</button>
+        </a>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="products">
+        <h2>Our Popular Products</h2>
+
+        <div class="container">
+
+            <div class="box">
+                <div class="product-icon">👕</div>
+                <h3>Fashion Wear</h3>
+                <p>Comfortable and trendy clothing.</p>
+                <p class="price">₹799</p>
+                <a href="#order">
+                    <button type="button">Buy Now</button>
+                </a>
+            </div>
+
+            <div class="box">
+                <div class="product-icon">⌚</div>
+                <h3>Smart Watch</h3>
+                <p>Stylish watches for everyday use.</p>
+                <p class="price">₹1,499</p>
+                <a href="#order">
+                    <button type="button">Buy Now</button>
+                </a>
+            </div>
+
+            <div class="box">
+                <div class="product-icon">🎒</div>
+                <h3>Backpack</h3>
+                <p>Modern bags for college and travel.</p>
+                <p class="price">₹999</p>
+                <a href="#order">
+                    <button type="button">Buy Now</button>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Offers table -->
+    <section class="information" id="offers">
+        <h2>Special Offers</h2>
+
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Original Price</th>
+                <th>Offer Price</th>
+            </tr>
+
+            <tr>
+                <td>Fashion Wear</td>
+                <td>₹999</td>
+                <td>₹799</td>
+            </tr>
+
+            <tr>
+                <td>Smart Watch</td>
+                <td>₹1,999</td>
+                <td>₹1,499</td>
+            </tr>
+
+            <tr>
+                <td>Backpack</td>
+                <td>₹1,299</td>
+                <td>₹999</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Order form -->
+    <section class="order" id="order">
+        <h2>Place Your Order</h2>
+
+        <form action="#" method="get">
+
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name"
+                   placeholder="Enter your name" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email"
+                   placeholder="Enter your email" required>
+
+            <label for="product">Choose Product:</label>
+            <select id="product" name="product" required>
+                <option value="">Select a product</option>
+                <option>Fashion Wear</option>
+                <option>Smart Watch</option>
+                <option>Backpack</option>
+            </select>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity"
+                   min="1" max="10" value="1" required>
+
+            <label for="address">Delivery Address:</label>
+            <textarea id="address" name="address" rows="3"
+                      placeholder="Enter your address" required></textarea>
+
+            <button type="submit">Place Order</button>
+            <button type="reset">Clear Form</button>
+
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <h3>PinkCart</h3>
+        <p>Email: pinkcart@example.com</p>
+        <p>Customer Support: +91 98765 43210</p>
+        <p>&copy; 2026 PinkCart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

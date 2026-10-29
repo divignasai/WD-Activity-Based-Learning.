@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Appointment Booking</title>
+
+    <style>
+        /* Basic CSS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f7ff;
+            color: #24364b;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #0759a5;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            font-size: 30px;
+        }
+
+        header p {
+            margin-top: 5px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            text-align: center;
+            padding: 14px;
+            border-bottom: 2px solid #c9e2ff;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #0759a5;
+            font-weight: bold;
+            margin: 0 15px;
+        }
+
+        nav a:hover {
+            color: #00a6d6;
+            text-decoration: underline;
+        }
+
+        /* Welcome Section */
+        .hero {
+            background-color: #dceeff;
+            text-align: center;
+            padding: 35px 15px;
+        }
+
+        .hero h2 {
+            color: #0759a5;
+            font-size: 28px;
+        }
+
+        .hero p {
+            margin: 10px;
+        }
+
+        .main-button {
+            display: inline-block;
+            background-color: #0759a5;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 12px;
+        }
+
+        .main-button:hover {
+            background-color: #003d73;
+        }
+
+        /* Section Heading */
+        .section-title {
+            text-align: center;
+            color: #0759a5;
+            margin: 30px 0 20px;
+            font-size: 26px;
+        }
+
+        /* Doctor Profile Boxes */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 22px;
+            padding: 10px 20px 30px;
+        }
+
+        .box {
+            background-color: white;
+            border: 2px solid #c9e2ff;
+            border-radius: 12px;
+            width: 245px;
+            padding: 22px 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 70, 140, 0.08);
+            transition: 0.3s;
+        }
+
+        /* Hover Effect */
+        .box:hover {
+            transform: translateY(-7px);
+            border-color: #0759a5;
+            box-shadow: 0 8px 18px rgba(0, 70, 140, 0.18);
+        }
+
+        .doctor-icon {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .box h3 {
+            color: #0759a5;
+            margin-bottom: 5px;
+        }
+
+        .speciality {
+            color: #087fbd;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .fee {
+            color: #0759a5;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        .book-button {
+            display: inline-block;
+            background-color: #0759a5;
+            color: white;
+            padding: 9px 17px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .book-button:hover {
+            background-color: #003d73;
+        }
+
+        /* Appointment Form */
+        .appointment {
+            background-color: white;
+            max-width: 650px;
+            margin: 20px auto 35px;
+            padding: 25px;
+            border: 2px solid #c9e2ff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 70, 140, 0.08);
+        }
+
+        .appointment label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+            color: #0759a5;
+        }
+
+        .appointment input,
+        .appointment select,
+        .appointment textarea {
+            width: 100%;
+            padding: 11px;
+            margin-top: 5px;
+            border: 1px solid #9fc9f2;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .appointment input:focus,
+        .appointment select:focus,
+        .appointment textarea:focus {
+            outline: 2px solid #75baff;
+        }
+
+        .submit-button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #0759a5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #003d73;
+        }
+
+        /* Timings Table */
+        .table-container {
+            padding: 10px 20px 35px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th, td {
+            border: 1px solid #9fc9f2;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #0759a5;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #eaf4ff;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0759a5;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            margin-top: 15px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 5px 8px;
+            }
+
+            .box {
+                width: 100%;
+                max-width: 340px;
+            }
+
+            .appointment {
+                margin: 20px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>💙 MediCare</h1>
+        <p>Your Health, Our Priority</p>
+        <p>Simple and Reliable Doctor Appointment Booking</p>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#doctors">Our Doctors</a>
+        <a href="#appointment">Book Appointment</a>
+        <a href="#timings">Timings</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Home Section -->
+    <section class="hero" id="home">
+        <h2>Find the Right Doctor for You</h2>
+        <p>Choose a specialist and request your appointment online.</p>
+        <a href="#doctors" class="main-button">Explore Doctors</a>
+    </section>
+
+    <!-- Doctor Profiles -->
+    <section id="doctors">
+        <h2 class="section-title">Our Specialist Doctors</h2>
+
+        <div class="container">
+
+            <div class="box">
+                <div class="doctor-icon">👨‍⚕️</div>
+                <h3>Dr. Rahul Sharma</h3>
+                <p class="speciality">General Physician</p>
+                <p>Experience: 8 Years</p>
+                <p>Available: Mon - Sat</p>
+                <p class="fee">Consultation: ₹500</p>
+                <a href="#appointment" class="book-button">Book Now</a>
+            </div>
+
+            <div class="box">
+                <div class="doctor-icon">👩‍⚕️</div>
+                <h3>Dr. Priya Reddy</h3>
+                <p class="speciality">Cardiologist</p>
+                <p>Experience: 10 Years</p>
+                <p>Available: Mon - Fri</p>
+                <p class="fee">Consultation: ₹800</p>
+                <a href="#appointment" class="book-button">Book Now</a>
+            </div>
+
+            <div class="box">
+                <div class="doctor-icon">👨‍⚕️</div>
+                <h3>Dr. Arjun Kumar</h3>
+                <p class="speciality">Dermatologist</p>
+                <p>Experience: 6 Years</p>
+                <p>Available: Tue - Sat</p>
+                <p class="fee">Consultation: ₹600</p>
+                <a href="#appointment" class="book-button">Book Now</a>
+            </div>
+
+            <div class="box">
+                <div class="doctor-icon">👩‍⚕️</div>
+                <h3>Dr. Sneha Rao</h3>
+                <p class="speciality">Pediatrician</p>
+                <p>Experience: 7 Years</p>
+                <p>Available: Mon - Sat</p>
+                <p class="fee">Consultation: ₹550</p>
+                <a href="#appointment" class="book-button">Book Now</a>
+            </div>
+
+            <div class="box">
+                <div class="doctor-icon">👨‍⚕️</div>
+                <h3>Dr. Kiran Verma</h3>
+                <p class="speciality">Orthopedic</p>
+                <p>Experience: 9 Years</p>
+                <p>Available: Mon - Fri</p>
+                <p class="fee">Consultation: ₹700</p>
+                <a href="#appointment" class="book-button">Book Now</a>
+            </div>
+
+            <div class="box">
+                <div class="doctor-icon">👩‍⚕️</div>
+                <h3>Dr. Ananya Patel</h3>
+                <p class="speciality">Gynecologist</p>
+                <p>Experience: 8 Years</p>
+                <p>Available: Mon - Sat</p>
+                <p class="fee">Consultation: ₹750</p>
+                <a href="#appointment" class="book-button">Book Now</a>
+            </div>
+
+            <div class="box">
+                <div class="doctor-icon">👨‍⚕️</div>
+                <h3>Dr. Vikram Singh</h3>
+                <p class="speciality">Neurologist</p>
+                <p>Experience: 12 Years</p>
+                <p>Available: Mon - Thu</p>
+                <p class="fee">Consultation: ₹900</p>
+                <a href="#appointment" class="book-button">Book Now</a>
+            </div>
+
+            <div class="box">
+                <div class="doctor-icon">👩‍⚕️</div>
+                <h3>Dr. Meera Das</h3>
+                <p class="speciality">Ophthalmologist</p>
+                <p>Experience: 5 Years</p>
+                <p>Available: Tue - Sat</p>
+                <p class="fee">Consultation: ₹500</p>
+                <a href="#appointment" class="book-button">Book Now</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Appointment Form -->
+    <section id="appointment">
+        <h2 class="section-title">Book Your Appointment</h2>
+
+        <form class="appointment" action="#" method="get">
+
+            <label for="patient">Patient Name</label>
+            <input type="text" id="patient" name="patient"
+                   placeholder="Enter your full name" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email"
+                   placeholder="Enter your email" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone"
+                   placeholder="Enter your phone number" required>
+
+            <label for="doctor">Select Doctor</label>
+            <select id="doctor" name="doctor" required>
+                <option value="">-- Choose a Doctor --</option>
+                <option>Dr. Rahul Sharma - General Physician</option>
+                <option>Dr. Priya Reddy - Cardiologist</option>
+                <option>Dr. Arjun Kumar - Dermatologist</option>
+                <option>Dr. Sneha Rao - Pediatrician</option>
+                <option>Dr. Kiran Verma - Orthopedic</option>
+                <option>Dr. Ananya Patel - Gynecologist</option>
+                <option>Dr. Vikram Singh - Neurologist</option>
+                <option>Dr. Meera Das - Ophthalmologist</option>
+            </select>
+
+            <label for="date">Appointment Date</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Preferred Time</label>
+            <select id="time" name="time" required>
+                <option value="">-- Select Time --</option>
+                <option>09:00 AM - 10:00 AM</option>
+                <option>10:00 AM - 11:00 AM</option>
+                <option>11:00 AM - 12:00 PM</option>
+                <option>02:00 PM - 03:00 PM</option>
+                <option>03:00 PM - 04:00 PM</option>
+                <option>04:00 PM - 05:00 PM</option>
+            </select>
+
+            <label for="message">Reason for Visit</label>
+            <textarea id="message" name="message" rows="3"
+                      placeholder="Enter your reason for consultation"></textarea>
+
+            <button type="submit" class="submit-button">
+                Submit Appointment Request
+            </button>
+
+        </form>
+    </section>
+
+    <!-- Consultation Timings -->
+    <section id="timings">
+        <h2 class="section-title">Consultation Timings</h2>
+
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Day</th>
+                    <th>Morning</th>
+                    <th>Evening</th>
+                </tr>
+                <tr>
+                    <td>Monday - Friday</td>
+                    <td>09:00 AM - 12:00 PM</td>
+                    <td>02:00 PM - 05:00 PM</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>09:00 AM - 01:00 PM</td>
+                    <td>02:00 PM - 04:00 PM</td>
+                </tr>
+                <tr>
+                    <td>Sunday</td>
+                    <td colspan="2">Closed</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <footer id="contact">
+        <h3>Contact MediCare</h3>
+        <p>Email: medicare@example.com</p>
+        <p>Phone: +91 98765 43210</p>
+        <p>Address: Main Road, Vijayawada</p>
+        <p>&copy; 2026 MediCare. All Rights Reserved.</p>
+        <p>Designed using HTML and CSS</p>
+    </footer>
+
+</body>
+</html>
